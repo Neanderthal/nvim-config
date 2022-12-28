@@ -1,0 +1,35 @@
+vim.g.mapleader = " "
+
+local builtin = require('telescope.builtin')
+local wk = require("which-key")
+
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+ 
+vim.keymap.set('n', '<leader>rl', ':MagmaEvaluateOperator<CR>', { silent = true, noremap = true, expr = true })
+vim.keymap.set('n', '<leader>rrl', ':MagmaEvaluateLine<CR>', { silent = true, noremap = true })
+vim.keymap.set('n', '<leader>rl', ':<C-u>MagmaEvaluateVisual<CR>', { silent = true, noremap = true })
+vim.keymap.set('n', '<leader>rcl', ':MagmaReevaluateCell<CR>', { silent = true, noremap = true })
+vim.keymap.set('n', '<leader>rdl', ':MagmaDelete<CR>', { silent = true, noremap = true })
+vim.keymap.set('n', '<leader>rol', ':MagmaShowOutput<CR>', { silent = true, noremap = true })  
+vim.g.magma_automatically_open_output = false
+vim.g.magma_image_provider = "ueberzug"
+
+wk.register({
+v = {
+  name = "Vimspector",
+  G = { "<cmd>lua require('config.vimspector').generate_debug_profile()<cr>", "Generate Debug Profile" },
+  I = { "<cmd>VimspectorInstall<cr>", "Install" },
+  U = { "<cmd>VimspectorUpdate<cr>", "Update" },
+  R = { "<cmd>call vimspector#RunToCursor()<cr>", "Run to Cursor" },
+  c = { "<cmd>call vimspector#Continue()<cr>", "Continue" },
+  i = { "<cmd>call vimspector#StepInto()<cr>", "Step Into" },
+  o = { "<cmd>call vimspector#StepOver()<cr>", "Step Over" },
+  s = { "<cmd>call vimspector#Launch()<cr>", "Start" },
+  t = { "<cmd>call vimspector#ToggleBreakpoint()<cr>", "Toggle Breakpoint" },
+  u = { "<cmd>call vimspector#StepOut()<cr>", "Step Out" },
+  S = { "<cmd>call vimspector#Stop()<cr>", "Stop" },
+  r = { "<cmd>call vimspector#Restart()<cr>", "Restart" },
+  x = { "<cmd>VimspectorReset<cr>", "Reset" },
+  H = { "<cmd>lua require('config.vimspector').toggle_human_mode()<cr>", "Toggle HUMAN mode" },
+}})

@@ -23,12 +23,15 @@ vim.env.PATH = os.getenv("VIRTUAL_ENV") .. "/bin:" .. vim.env.PATH
 
 return {
   "mfussenegger/nvim-dap",
+  resolve_python = function()
+    return os.getenv("VIRTUAL_ENV") .. "/bin/python"
+  end,
   optional = true,
   adapters = {
     python = {
       type = "executable",
       command = venv_python_path(),
-      args = { "-m", "debugpy.adapter" },
+      args = { "-m", "debugpy" },
     },
   },
   configurations = {
